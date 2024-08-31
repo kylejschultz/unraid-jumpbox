@@ -43,7 +43,7 @@ RUN sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/ins
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /usr/share/oh-my-zsh/custom/themes/powerlevel10k
 
 # Download and Install Font
-RUN wget -O /tmp/font.zip "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Hack.zip" \
+RUN curl -Lo /tmp/font.zip "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Hack.zip" \
     && unzip /tmp/font.zip -d /usr/share/fonts \
     && fc-cache -fv \
     && rm /tmp/font.zip
