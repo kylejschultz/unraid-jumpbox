@@ -37,7 +37,7 @@ RUN echo "source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highl
 RUN mkdir -p /run/sshd
 
 # Expose port 22 for SSH
-EXPOSE 22
+EXPOSE ${JUMP_PORT:-22}
 
 # Set the entrypoint to the entrypoint.sh script
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]

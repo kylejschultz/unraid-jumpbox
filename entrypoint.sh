@@ -26,6 +26,13 @@ fi
 echo "JUMP_USER=\"$JUMP_USER\"" >> /etc/jump-settings
 echo "JUMP_PUBLIC_KEY=\"$JUMP_PUBLIC_KEY\"" >> /etc/jump-settings
 
+# Set up SSH key for the user
+mkdir -p /home/$JUMP_USER/.ssh
+echo "$JUMP_PUBLIC_KEY" > /home/$JUMP_USER/.ssh/authorized_keys
+chown -R $JUMP_USER:$JUMP_USER /home/$JUMP_USER/.ssh
+chmod 700 /home/$JUMP_USER/.ssh
+chmod 600 /home/$JUMP_USER/.ssh/authorized_keys
+
 # Copy the updated .zshrc to the user's home directory
 cp /etc/skel/.zshrc /home/$JUMP_USER/.zshrc
 chown $JUMP_USER:$JUMP_USER /home/$JUMP_USER/.zshrc
