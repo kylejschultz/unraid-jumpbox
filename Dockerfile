@@ -12,7 +12,20 @@ COPY entrypoint.sh /usr/bin/entrypoint.sh
 # Install Packages
 RUN DEBIAN_FRONTEND=noninteractive \
     apt update \
-    && apt install -y python3 ruby zsh git vim zsh-autosuggestions zsh-syntax-highlighting curl openssh-server netcat telnet \
+    && apt install -y python3 \
+        ruby \
+        zsh \
+        git \
+        vim \
+        zsh-autosuggestions \
+        zsh-syntax-highlighting \
+        curl \
+        openssh-server \
+        netcat \
+        telnet \
+        ruby-dev \
+        gcc \
+        make \
     && rm -rf /var/lib/apt/lists/* \
     && chmod 755 /usr/bin/ssh-user-auth.sh \
     && chmod 755 /usr/bin/entrypoint.sh
