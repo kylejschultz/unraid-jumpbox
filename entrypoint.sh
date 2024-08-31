@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Function to delete existing users
+# Function to delete existing users except system users
 delete_existing_users() {
     # Get a list of all users except system users
     users=$(awk -F: '$3 >= 1000 {print $1}' /etc/passwd)
@@ -15,10 +15,10 @@ delete_existing_users() {
 # Delete existing users
 delete_existing_users
 
-# Create a user entry for the one and only jump user, but without a home
-# directory or the ability to get an interactive shell. This user will only be
-# able to create tunnels.
-/usr/sbin/useradd -d / -s /bin/false "$JUMP_USER"
+# Create a user entry for the jump user with a home directory and Zsh shell
+if ! id "$JUMP_USER" &>/dev/null; then
+    /usr/sbin/useradd -m -s /bin/zsh "$JUMP_USER"
+fi
 
 # Put the relevant Docker environment variables into a file that the auth
 # helper script can read easily.
