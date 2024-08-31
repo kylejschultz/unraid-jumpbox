@@ -27,6 +27,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
         gcc \
         make \
         unzip \
+        fontconfig \
     && rm -rf /var/lib/apt/lists/* \
     && chmod 755 /usr/bin/ssh-user-auth.sh \
     && chmod 755 /usr/bin/entrypoint.sh
