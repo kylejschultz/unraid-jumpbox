@@ -24,6 +24,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
         netcat \
         telnet \
         ruby-dev \
+        libc6-dev \
         gcc \
         make \
         unzip \
