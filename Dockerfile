@@ -34,11 +34,12 @@ RUN DEBIAN_FRONTEND=noninteractive \
     && chmod 755 /usr/bin/entrypoint.sh
 
 # Configure SSH to use the ssh-user-auth.sh script for authorized keys
-RUN echo "AuthorizedKeysCommand /usr/bin/ssh-user-auth.sh" >> /etc/ssh/sshd_config \
+RUN sed -i 's/^UsePAM yes/#UsePAM yes/' /etc/ssh/sshd_config \
+    && echo "AuthorizedKeysCommand /usr/bin/ssh-user-auth.sh" >> /etc/ssh/sshd_config \
     && echo "AuthorizedKeysCommandUser nobody" >> /etc/ssh/sshd_config \
     && echo "PasswordAuthentication no" >> /etc/ssh/sshd_config \
     && echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config \
-    && echo "UsePAM no" >> /etc/ssh/sshd_config
+    && echo "UsePAM yes" >> /etc/ssh/sshd_config
 
 # Install Oh My Zsh
 RUN sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
