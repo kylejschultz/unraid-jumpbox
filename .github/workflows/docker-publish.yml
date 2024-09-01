@@ -10,6 +10,10 @@ on:
     branches: [ "main" ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
+    paths-ignore:
+      - '**/README.md'
+      - '**/LICENSE'
+      - '.github/workflows/*.yml'
   pull_request:
     branches: [ "main" ]
 
