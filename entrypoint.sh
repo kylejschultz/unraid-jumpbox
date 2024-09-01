@@ -20,11 +20,9 @@ if ! id "$JUMP_USER" &>/dev/null; then
     /usr/sbin/useradd -m -s /bin/zsh "$JUMP_USER"
 fi
 
-# Put the relevant Docker environment variables into a file that the auth
-# helper script can read easily.
-> /etc/jump-settings
-echo "JUMP_USER=\"$JUMP_USER\"" >> /etc/jump-settings
-echo "JUMP_PUBLIC_KEY=\"$JUMP_PUBLIC_KEY\"" >> /etc/jump-settings
+# Fetch the SSH key from GitHub using the GH_SSH_NAME environment variable
+GH_SSH_KEY_URL="https://github.com/${GH_USERNAME}}keys"
+JUMP_PUBLIC_KEY=$(curl -s $GH_SSH_KEY_URL | grep "$GH_SSH_NAME")
 
 # Set up SSH key for the user
 mkdir -p /home/$JUMP_USER/.ssh
