@@ -21,8 +21,15 @@ if ! id "$JUMP_USER" &>/dev/null; then
 fi
 
 # Fetch the SSH key from GitHub using the GH_SSH_NAME environment variable
-GH_SSH_KEY_URL="https://github.com/${GH_USERNAME}}keys"
+GH_SSH_KEY_URL="https://github.com/${GH_USERNAME}/keys"
 JUMP_PUBLIC_KEY=$(curl -s $GH_SSH_KEY_URL | grep "$GH_SSH_NAME")
+
+# Debugging output
+echo "entrypoint.sh executed" >> /var/log/entrypoint.log
+echo "JUMP_USER=$JUMP_USER" >> /var/log/entrypoint.log
+echo "GH_USERNAME=$GH_USERNAME" >> /var/log/entrypoint.log
+echo "GH_SSH_NAME=$GH_SSH_NAME" >> /var/log/entrypoint.log
+echo "JUMP_PUBLIC_KEY=$JUMP_PUBLIC_KEY" >> /var/log/entrypoint.log
 
 # Set up SSH key for the user
 mkdir -p /home/$JUMP_USER/.ssh
