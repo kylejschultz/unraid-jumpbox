@@ -1,5 +1,5 @@
 # Base Image
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # APT Configuration
 RUN echo 'APT::Install-Suggests "0";' >> /etc/apt/apt.conf.d/00-docker
