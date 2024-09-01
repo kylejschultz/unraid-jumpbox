@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Function to delete existing users except system users
+# Function to delete existing users except system users and the nobody user
 delete_existing_users() {
-    # Get a list of all users except system users
-    users=$(awk -F: '$3 >= 1000 {print $1}' /etc/passwd)
+    # Get a list of all users except system users and the nobody user
+    users=$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd)
     for user in $users; do
         if [ "$user" != "$JUMP_USER" ]; then
             echo "Deleting user $user"
