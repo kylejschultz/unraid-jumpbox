@@ -21,7 +21,6 @@ RUN DEBIAN_FRONTEND=noninteractive \
         zsh-syntax-highlighting \
         curl \
         openssh-server \
-        netcat \
         telnet \
         ruby-dev \
         libc6-dev \
