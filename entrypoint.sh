@@ -23,11 +23,7 @@ fi
 # Fetch the SSH key from GitHub using the GH_SSH_NAME environment variable
 GH_SSH_KEY_URL="https://api.github.com/users/${GH_USERNAME}/keys"
 echo "Fetching SSH key from $GH_SSH_KEY_URL"
-GH_KEYS=$(curl -s $GH_SSH_KEY_URL | jq -r '.[] | select(.id == '$GH_SSH_NAME') | .key')
-echo "Fetched key: $GH_KEYS"
-
-# Extract the key using jq
-JUMP_PUBLIC_KEY=$(echo "$GH_KEYS" | jq -r --arg GH_SSH_NAME "$GH_SSH_NAME" '.[] | select(.id == ($GH_SSH_NAME | tonumber)) | .key')
+JUMP_PUBLIC_KEY=$(curl -s $GH_SSH_KEY_URL | jq -r '.[] | select(.id == '$GH_SSH_NAME') | .key')
 echo "Filtered key: $JUMP_PUBLIC_KEY"
 
 # Debugging output
