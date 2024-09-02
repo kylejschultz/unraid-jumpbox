@@ -5,8 +5,10 @@ delete_existing_users() {
     # Get a list of all users except system users and the nobody user
     users=$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd)
     for user in $users; do
-            echo "Deleting user $user"
-            userdel -r $user
+		if [ "$user" = "$JUMP_USER" ]; then
+			echo "Deleting user $user"
+			userdel -r $user
+		fi
     done
 }
 
