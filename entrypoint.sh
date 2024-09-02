@@ -1,21 +1,21 @@
 #!/bin/bash
-# Delete existing jump users
-echo "Deleting users: $JUMP_USER"
-userdel -r $JUMP_USER
-
-# Create a user entry for the jump user with a home directory and Zsh shell
-if ! id "$JUMP_USER" &>/dev/null; then
-    /usr/sbin/useradd -m -s /bin/zsh "$JUMP_USER"
+# Delete existing jump users only if they exist
+if id "$JUMP_USER" &>/dev/null; then
+    echo "Deleting user: $JUMP_USER"
+    userdel -r "$JUMP_USER"
 fi
 
-# Unlock the user account if it is locked
-passwd -u "$JUMP_USER"
+# Create a user entry for the jump user with a home directory and Zsh shell
+echo "Creating user: $JUMP_USER"
+useradd -m -s /bin/zsh "$JUMP_USER"
+
+# Set the user password to `*` to disable password login but keep the account active
+passwd -d "$JUMP_USER"
 
 # Fetch the SSH key from GitHub using the GH_SSH_NAME environment variable
 GH_SSH_KEY_URL="https://api.github.com/users/${GH_USERNAME}/keys"
 echo "Fetching SSH key from $GH_SSH_KEY_URL"
 JUMP_PUBLIC_KEY=$(curl -s $GH_SSH_KEY_URL | jq -r '.[] | select(.id == '$GH_SSH_NAME') | .key')
-echo "Filtered key: $JUMP_PUBLIC_KEY"
 
 # Debugging output
 echo "entrypoint.sh executed"
