@@ -1,24 +1,15 @@
 #!/bin/bash
-
-# Function to delete existing users except system users and the nobody user
-delete_existing_users() {
-    # Get a list of all users except system users and the nobody user
-    users=$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd)
-    for user in $users; do
-		if [ "$user" = "$JUMP_USER" ]; then
-			echo "Deleting user $user"
-			userdel -r $user
-		fi
-    done
-}
-
-# Delete existing users
-delete_existing_users
+# Delete existing jump users
+echo "Deleting users: $JUMP_USER"
+userdel -r $JUMP_USER
 
 # Create a user entry for the jump user with a home directory and Zsh shell
 if ! id "$JUMP_USER" &>/dev/null; then
     /usr/sbin/useradd -m -s /bin/zsh "$JUMP_USER"
 fi
+
+# Unlock the user account if it is locked
+passwd -u "$JUMP_USER"
 
 # Fetch the SSH key from GitHub using the GH_SSH_NAME environment variable
 GH_SSH_KEY_URL="https://api.github.com/users/${GH_USERNAME}/keys"
