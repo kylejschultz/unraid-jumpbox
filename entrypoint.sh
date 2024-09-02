@@ -26,6 +26,10 @@ echo "Fetching SSH key from $GH_SSH_KEY_URL"
 GH_KEYS=$(curl -s $GH_SSH_KEY_URL | jq -r '.[] | select(.id == '$GH_SSH_NAME') | .key')
 echo "Fetched key: $GH_KEYS"
 
+# Extract the key using jq
+JUMP_PUBLIC_KEY=$(echo "$GH_KEYS" | jq -r --arg GH_SSH_NAME "$GH_SSH_NAME" '.[] | select(.id == ($GH_SSH_NAME | tonumber)) | .key')
+echo "Filtered key: $JUMP_PUBLIC_KEY"
+
 # Debugging output
 echo "entrypoint.sh executed"
 echo "JUMP_USER=$JUMP_USER"
