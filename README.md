@@ -16,7 +16,7 @@ A lightweight Ubuntu container used for SSHing onto an Unraid server to access o
 - `JUMP_USER`: The username for the jump user.
 - `JUMP_PORT`: The port on which the SSH daemon will listen (default: 22).
 - `GH_USERNAME`: The GitHub username to fetch the SSH key from.
-- `GH_SSH_NAME`: The name of the SSH key to fetch from GitHub.
+- `GH_SSH_NAME`: The id of the SSH key to fetch from GitHub (instructions below)
 
 ## Usage
 
