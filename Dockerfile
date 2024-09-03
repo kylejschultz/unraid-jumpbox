@@ -31,6 +31,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
         fontconfig \
         jq \
         hstr \
+        locales \
     && rm -rf /var/lib/apt/lists/* \
     && chmod 755 /usr/bin/ssh-user-auth.sh \
     && chmod 755 /usr/bin/entrypoint.sh
@@ -42,6 +43,15 @@ RUN sed -i 's/^UsePAM yes/#UsePAM yes/' /etc/ssh/sshd_config \
     && echo "PasswordAuthentication no" >> /etc/ssh/sshd_config \
     && echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config \
     && echo "UsePAM no" >> /etc/ssh/sshd_config
+
+# Install locales package and set locale
+RUN locale-gen en_US.UTF-8 && \
+    update-locale LANG=en_US.UTF-8
+
+# Set environment variables for locale
+ENV LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8
 
 # Install Oh My Zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
