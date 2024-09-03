@@ -57,7 +57,7 @@ docker run -d \
   --name unraid-jumpbox \
   -e JUMP_USER=your_jump_user \
   -e GH_USERNAME=your_github_username \
-  -e GH_SSH_NAME=your_ssh_key_name \
+  -e GH_SSH_NAME=your_ssh_key_id \
   -e JUMP_PORT=22 \
   -p 22:22 \
   ghcr.io/kylejschultz/unraid-jumpbox:main
@@ -74,7 +74,7 @@ services:
       - JUMP_USER=your_jump_user
       - JUMP_PUBLIC_KEY=your_public_key
       - GH_USERNAME=your_github_username
-      - GH_SSH_NAME=your_ssh_key_name
+      - GH_SSH_NAME=your_ssh_key_id
       - JUMP_PORT=22
     ports:
       - "22:22"
