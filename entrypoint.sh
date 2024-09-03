@@ -9,6 +9,9 @@ fi
 echo "Creating user: $JUMP_USER"
 useradd -m -s /bin/zsh "$JUMP_USER"
 
+# Add the user to the sudo group
+usermod -aG sudo "$JUMP_USER"
+
 # Set the user password to `*` to disable password login but keep the account active
 passwd -d "$JUMP_USER"
 

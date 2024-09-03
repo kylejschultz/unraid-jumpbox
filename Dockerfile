@@ -30,6 +30,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
         unzip \
         fontconfig \
         jq \
+        hstr \
     && rm -rf /var/lib/apt/lists/* \
     && chmod 755 /usr/bin/ssh-user-auth.sh \
     && chmod 755 /usr/bin/entrypoint.sh
