@@ -28,7 +28,7 @@ echo "GH_SSH_NAME=$GH_SSH_NAME"
 echo "JUMP_PUBLIC_KEY=$JUMP_PUBLIC_KEY"
 
 # Set up P10k theme for the user
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /home/$your_jump_user/powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /home/$JUMP_USER/powerlevel10k
 
 # Set up SSH key for the user
 mkdir -p /home/$JUMP_USER/.ssh
