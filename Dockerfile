@@ -53,6 +53,11 @@ ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8
 
+# Copy the custom .zshrc file into the image and apply it as default for new users
+COPY .zshrc /tmp/.zshrc
+RUN cat /tmp/.zshrc >> /etc/skel/.zshrc \
+    && rm /tmp/.zshrc
+
 # Install Oh My Zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
@@ -67,11 +72,6 @@ RUN curl -Lo /tmp/font.zip "https://github.com/ryanoasis/nerd-fonts/releases/dow
 
 # install colorls
 RUN gem install colorls
-
-# Copy the custom .zshrc file into the image and apply it as default for new users
-COPY .zshrc /tmp/.zshrc
-RUN cat /tmp/.zshrc >> /etc/skel/.zshrc \
-    && rm /tmp/.zshrc
 
 # Create the /run/sshd directory required by the SSH daemon
 RUN mkdir -p /run/sshd
