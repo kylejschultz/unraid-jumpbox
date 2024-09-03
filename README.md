@@ -44,9 +44,9 @@ A lightweight Ubuntu container used for SSHing onto an Unraid server to access o
     - Click Add SSH key.
 4. **Get the SSH Key ID from GitHub**:
     - Use the GitHub API to list your SSH keys and find the key ID:
-    ```sh
-    curl -s -u your_github_username https://api.github.com/user/keys
-    ```
+        ```sh
+        curl -s -u your_github_username https://api.github.com/user/keys
+        ```
     - Look for the `id` field corresponding to your uploaded key. You'll use this when deploying the container as the `GH_SSH_NAME` environment variable.
 
 ### Docker Deployment
