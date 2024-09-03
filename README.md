@@ -36,9 +36,9 @@ A lightweight Ubuntu container used for SSHing onto an Unraid server to access o
     ```
 3. **Upload the SSH Key to GitHub**:
     - Copy the SSH key to your clipboard:
-    ```sh
-    cat ~/.ssh/id_rsa.pub
-    ```
+        ```sh
+        cat ~/.ssh/id_rsa.pub
+        ```
     - Go to GitHub and navigate to **Settings** > **SSH and GPG keys** > **New SSH key**.
     - Paste the copied key into the *"Key"* field and give it a descriptive title.
     - Click Add SSH key.
