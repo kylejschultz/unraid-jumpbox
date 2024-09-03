@@ -43,7 +43,7 @@ RUN sed -i 's/^UsePAM yes/#UsePAM yes/' /etc/ssh/sshd_config \
     && echo "UsePAM no" >> /etc/ssh/sshd_config
 
 # Install Oh My Zsh
-RUN sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Install Powerlevel10k theme
 RUN git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
