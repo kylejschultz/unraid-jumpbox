@@ -17,6 +17,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
         zsh \
         git \
         vim \
+        nano \
         zsh-autosuggestions \
         zsh-syntax-highlighting \
         curl \
@@ -42,10 +43,10 @@ RUN sed -i 's/^UsePAM yes/#UsePAM yes/' /etc/ssh/sshd_config \
     && echo "UsePAM no" >> /etc/ssh/sshd_config
 
 # Install Oh My Zsh
-RUN sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+RUN sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)
 
 # Install Powerlevel10k theme
-RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /usr/share/oh-my-zsh/custom/themes/powerlevel10k
+RUN git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 
 # Download and Install Font
 RUN curl -Lo /tmp/font.zip "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Hack.zip" \
@@ -56,12 +57,10 @@ RUN curl -Lo /tmp/font.zip "https://github.com/ryanoasis/nerd-fonts/releases/dow
 # install colorls
 RUN gem install colorls
 
-# Configure Zsh to use syntax highlighting, autosuggestions plugins, and Powerlevel10k theme
-RUN echo "source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> /etc/skel/.zshrc \
-    && echo "source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" >> /etc/skel/.zshrc \
-    && echo "ZSH_THEME=\"powerlevel10k/powerlevel10k\"" >> /etc/skel/.zshrc \
-    && echo "source $(dirname $(gem which colorls))/tab_complete.sh" >> /etc/skel/.zshrc \
-    && echo "alias lc='colorls -A --sd'" >> /etc/skel/.zshrc
+# Copy the custom .zshrc file into the image and apply it as default for new users
+COPY .zshrc /tmp/.zshrc
+RUN cat /tmp/.zshrc >> /etc/skel/.zshrc \
+    && rm /tmp/.zshrc
 
 # Create the /run/sshd directory required by the SSH daemon
 RUN mkdir -p /run/sshd
