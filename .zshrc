@@ -1,5 +1,5 @@
 # Powerlevel10k Configuration
-ZSH_THEME="powerlevel10k/powerlevel10k"
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # ColorLS
 source $(dirname $(gem which colorls))/tab_complete.sh
