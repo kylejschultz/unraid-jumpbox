@@ -58,6 +58,11 @@ COPY .zshrc /tmp/.zshrc
 RUN cat /tmp/.zshrc >> /etc/skel/.zshrc \
     && rm /tmp/.zshrc
 
+# Copy P10k config to default template
+COPY .p10k.zsh /tmp/.p10k.zsh
+RUN cat /tmp/.p10k.zsh >> /etc/skel/.p10k.zsh \
+    && rm /tmp/.p10k.zsh
+
 # Install Oh My Zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 

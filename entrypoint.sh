@@ -41,5 +41,9 @@ chmod 600 /home/$JUMP_USER/.ssh/authorized_keys
 cp /etc/skel/.zshrc /home/$JUMP_USER/.zshrc
 chown $JUMP_USER:$JUMP_USER /home/$JUMP_USER/.zshrc
 
+# Copy the updated .p10k.zsh to the user's home directory
+cp /etc/skel/.p10k.zsh /home/$JUMP_USER/.p10k.zsh
+chown $JUMP_USER:$JUMP_USER /home/$JUMP_USER/.p10k.zsh
+
 # Start the SSH daemon.
 exec /usr/sbin/sshd -D -e -p "${JUMP_PORT:-22}"
