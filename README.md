@@ -51,7 +51,7 @@ A lightweight Ubuntu container used for SSHing onto an Unraid server to access o
 ### Unraid Deployment
 On the **Docker** tab, select **Add Container** and create the fields as listed in the screenshot below.
 ![Unraid Configuration](img/unraid-setup.jpeg)
-*Future plans are to create an Unraid app to make Unraid deployment smoother.*
+*In the future, this will hopefully be available via the Unraid App store.*
 ### Docker Deployment
 To deploy the container using Docker, you can use the following command:
 
