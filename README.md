@@ -48,7 +48,10 @@ A lightweight Ubuntu container used for SSHing onto an Unraid server to access o
         curl -s -u your_github_username https://api.github.com/user/keys
         ```
     - Look for the `id` field corresponding to your uploaded key. You'll use this when deploying the container as the `GH_SSH_NAME` environment variable.
-
+### Unraid Deployment
+On the **Docker** tab, select **Add Container** and create the fields as listed in the screenshot below.
+![Unraid Configuration](img/unraid-setup.jpeg)
+*Future plans are to create an Unraid app to make Unraid deployment smoother.*
 ### Docker Deployment
 To deploy the container using Docker, you can use the following command:
 
