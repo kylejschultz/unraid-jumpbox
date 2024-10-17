@@ -45,7 +45,10 @@ chown $JUMP_USER:$JUMP_USER /home/$JUMP_USER/.zshrc
 cp /etc/skel/.p10k.zsh /home/$JUMP_USER/.p10k.zsh
 chown $JUMP_USER:$JUMP_USER /home/$JUMP_USER/.p10k.zsh
 
-# Create a bind mount for /unraid with the appropriate permissions for the jump user
+# Clean up any existing bind mount, create bind mount forß /unraid with the appropriate permissions for the jump user
+if mountpoint -q /home/$JUMP_USER/unraid; then
+    umount /home/$JUMP_USER/unraid
+fi
 mkdir -p /home/$JUMP_USER/unraid
 bindfs -u $JUMP_USER -g $JUMP_USER /unraid /home/$JUMP_USER/unraid
 
